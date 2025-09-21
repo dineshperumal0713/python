@@ -1,2 +1,2 @@
-print "Congradulations"
-print(Congradulations.upper)
+x= "Congradulations"
+print (x.upper())
