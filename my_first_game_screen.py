@@ -7,7 +7,7 @@ center_rect = pygame.Rect(0, 0, 300, 300)
 center_rect.center = (250, 250)
 
 font = pygame.font.SysFont("Arial", 25)
-text_surface = font.render("my firrst pygame window", True, (255, 255, 255))
+text_surface = font.render("my first pygame window", True, (255, 255, 255))
 
 running = True
 while running:
