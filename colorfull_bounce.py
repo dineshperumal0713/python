@@ -2,11 +2,11 @@ import pygame
 import random
 
 pygame.init()
-SPRIT_COLOR_CHANGE_EVENT = pygame.USEREVENT + 1
+SPRITE_COLOR_CHANGE_EVENT = pygame.USEREVENT + 1
 BACKGROUND_COLOR_CHANGE_EVENT = pygame.USEREVENT + 2
 BLUE  = pygame.Color("blue")
-LIGHT_BLUE = pygame.Color("lightblue")
-DARK_BLUE = pygame.Color("darkblue")
+LIGHTBLUE = pygame.Color("lightblue")
+DARKBLUE = pygame.Color("darkblue")
 
 YELLOW = pygame.Color("yellow")
 MAGENTA = pygame.Color("magenta")
@@ -14,9 +14,10 @@ ORANGE = pygame.Color("orange")
 WHITE = pygame.Color("white")
 
 class sprite(pygame.sprite.Sprite):
-    def __init__(self,height,width,color):
+    def __init__(self ,color,height,width):
         super().__init__()
-        self.image = pygame.Surface([height,width])
+        self.image = pygame.Surface((width,height))
+        
         self.image.fill(color)
         self.rect = self.image.get_rect()
         self.velocity = [random.choice([-1,1]),random.choice([-1,1])]
@@ -30,7 +31,7 @@ class sprite(pygame.sprite.Sprite):
             self.velocity[1] = -self.velocity[1]
             boundary_hit = True 
         if boundary_hit:
-            pygame.event.post(pygame.event.Event(SPRIT_COLOR_CHANGE_EVENT))
+            pygame.event.post(pygame.event.Event(SPRITE_COLOR_CHANGE_EVENT))
             pygame.event.post(pygame.event.Event(BACKGROUND_COLOR_CHANGE_EVENT))
     def change_color(self):
       self.image.fill(random.choice([YELLOW,MAGENTA,ORANGE,WHITE]))
@@ -39,7 +40,7 @@ def change_background_color():
     bg_color = random.choice([BLUE,LIGHT_BLUE,DARK_BLUE])
  
 all_sprites_list = pygame.sprite.Group()
-sp1 = sprite (WHITE,20,30) 
+sp1 = sprite(WHITE,20,30) 
 sp1.rect.x  = random.randint(0,480)
 sp1.rect.y = random.randint(0,370)
 all_sprites_list.add(sp1)
@@ -57,3 +58,9 @@ while not exit:
             sp1.change_color()
         elif event.type == BACKGROUND_COLOR_CHANGE_EVENT:
             change_background_color()
+    all_sprites_list.update()
+    screen.fill(bg_color)
+    all_sprites_list.draw(screen)
+    pygame.diplay.flip()
+    clock.tick(240)
+pygame.quit()
