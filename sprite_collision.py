@@ -5,8 +5,7 @@ screen_width , screen_hieght = 640, 480
 movement_speed = 5
 font_size = 72
 pygame.init()
-background_image = pygame.Surface((screen_width, screen_hieght))
-background_image.fill((0,0,0))
+background_image = pygame.transform.scale(pygame.image.load("background_image.jpg"), (screen_width, screen_hieght))
 font = pygame.font.SysFont("Times New Roman", font_size)
 class sprite(pygame.sprite.Sprite):
      def __init__(self, color, hieght, width):
