@@ -27,4 +27,3 @@ password_entry.place(x=150 , y=140)
 btn.place(x=130 , y=210)
 textbox.place(y = 250)
 root.mainloop()
-
